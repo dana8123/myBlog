@@ -1,18 +1,18 @@
-const express = require('express');
+import express from "express";
 const app = express();
-const port = 3000;
-const pug = require('pug');
 
-const handleHome(req,res) => {
-  res.send("Hello from home!")
-}
 
-app.get("/", handleHome);
-
+//middle wares
 app.use(express.urlencoded({extended : false}));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-});
+//routers
+const handleHome = (req,res)=>{
+  res.send("Hello from home")
+}
+
+app.get("/", handleHome);
+
+
+export default app;

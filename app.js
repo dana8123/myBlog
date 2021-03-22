@@ -7,7 +7,10 @@ const app = express();
 app.use(express.urlencoded({extended : false}));
 app.use(express.json());
 app.use(express.static('public'));
-app.use("/",globalRouter)
+app.use("/",globalRouter);
+app.use("/create",globalRouter);
+app.use("/update",globalRouter);
+app.use("/detail",globalRouter);
 //routers
 
 

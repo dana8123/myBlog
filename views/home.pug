@@ -1,7 +1,8 @@
 doctype html
 html(lang = "kr")
 head
-  title myBlog
+  title #{title}
 
-body
-  p You are amazing
+ul
+  each fruit in ['사과','배','오렌지','바나나','복숭아']
+    li= fruit

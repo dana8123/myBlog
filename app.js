@@ -1,4 +1,5 @@
 import express from "express";
+import { indexRouter } from "./routes/indexRoutes.js";
 import { postRouter } from "./routes/postRoutes.js";
 const app = express();
 
@@ -10,12 +11,8 @@ app.use(express.urlencoded({extended : false}));
 app.use(express.json());
 app.use(express.static('public'));
 
-const handleHome = (req,res)=>{
-  res.send("Hello! its home!")
-}
-
-app.get("/",handleHome);
-// post/routes
+//routing
+app.use("/",indexRouter)
 app.use("/post",postRouter) 
 
 

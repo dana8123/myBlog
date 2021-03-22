@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "express, mongoDB CRUD without Log in",
   "main": "index.js",
-  "type" : "module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,7 @@
   "homepage": "https://github.com/danaisboss/myBlog#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mongoose": "^5.12.1",
     "pug": "^3.0.2"
   }
 }

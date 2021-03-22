@@ -1,4 +1,5 @@
 import express from "express";
+import { globalRouter } from "./routes.js";
 const app = express();
 
 
@@ -6,13 +7,9 @@ const app = express();
 app.use(express.urlencoded({extended : false}));
 app.use(express.json());
 app.use(express.static('public'));
-
+app.use("/",globalRouter)
 //routers
-const handleHome = (req,res)=>{
-  res.send("Hello from home")
-}
 
-app.get("/", handleHome);
 
 
 export default app;

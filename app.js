@@ -1,7 +1,8 @@
 import express from "express";
 import { indexRouter } from "./routes/indexRoutes.js";
-import { postRouter } from "./routes/postRoutes.js";
+import connect from "./models/index.js";
 const app = express();
+connect();
 
 
 app.set('view engine', 'pug');
@@ -13,7 +14,6 @@ app.use(express.static('public'));
 
 //routing
 app.use("/",indexRouter)
-app.use("/post",postRouter) 
 
 
 

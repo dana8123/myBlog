@@ -24,4 +24,14 @@ const postSchema = new Schema({
   }
 }) 
 
-module.exports = mongoose.model('Post', postSchema);
+
+const model = mongoose.model("Post", postSchema);
+
+await model.create({
+  title : "testtitle",
+  author: "niniz",
+  pwd: "12345",
+  content: "testhahah"
+});
+  
+export default model;

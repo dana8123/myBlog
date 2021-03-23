@@ -2,8 +2,7 @@ import mongoose from 'mongoose';
 
 const connect = () => {
 
-mongoose.connect('mongodb://sample02:0070dmdkr!@localhost/admin', {
-  dbName : 'myBlog',
+mongoose.connect('mongodb://localhost/myBlog', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
@@ -16,6 +15,9 @@ mongoose.connect('mongodb://sample02:0070dmdkr!@localhost/admin', {
 }
 );
 };
+
+connect();
+
 mongoose.connection.on('error',(error)=>{
   console.error('몽고디비 연결 에러',error);
 });
@@ -24,6 +26,3 @@ mongoose.connection.on('disconnected()', ()=>{
   connect();
 });
 
-
-
-export default connect

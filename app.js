@@ -1,8 +1,6 @@
 import express from "express";
 import { indexRouter } from "./routes/indexRoutes.js";
-import connect from "./models/index.js";
 const app = express();
-connect();
 
 
 app.set('view engine', 'pug');

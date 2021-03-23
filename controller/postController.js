@@ -12,6 +12,25 @@ export const home = async (req,res) => {
 }
 
 
-export const upload = (req,res) => res.render("upload",{title: 'myBlog'});
+export const getUpload = (req,res) => 
+  res.render("upload",{title: 'myBlog'});
 
-export const update = (req,res) => res.send('this is update');
+export const postUpload = async(req,res) =>  {
+  const {
+    body: { title, author, pwd, content }
+  } = req;
+  const newPost = await Post.create({
+    title,
+    author,
+    pwd,
+    content
+  });
+  res.redirect("/");
+}
+
+export const postUpdate = (req,res) => 
+res.send('this is update');
+
+export const getUpdate = (req,res) => 
+res.send('this is update');
+

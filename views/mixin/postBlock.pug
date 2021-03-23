@@ -1,7 +1,8 @@
-mixin list
-  ul
-    li foo
-    li bar
-    li baz
+mixin postBlock(post = {})
 
-script(src='public/post.js')
+  .postBlock
+      h2.postBlock__title=post.title 
+      h3.postBlock__author=post.author
+      h6.postBlock__createAt=post.createAt 
+
+

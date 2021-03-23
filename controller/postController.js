@@ -1,13 +1,13 @@
-import Post from "../models/post";
+import Post from "../models/post.js";
 
-export const home = (req,res) => {
+export const home = async (req,res) => {
   try{
-    const posts = await Post.find({}).sort({createAt});
+    const posts = await Post.find({}).sort({createAt: -1});//await빠짐
     console.log(posts);
-    res.render("home",{ pateTitle: 'myBlog', posts });
+    res.render("home",{ siteTitle: 'myBlog', posts });
   } catch(error){
     console.log(error);
-    res.render("Home", { pateTitle: 'myBlog', posts:[] });
+    res.render("Home", { siteTitle: 'myBlog', posts:[] });
   }
 }
 

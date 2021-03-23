@@ -2,5 +2,10 @@ extends layouts/main.pug
 include mixin/postBlock.pug
 
 block content 
-  .list
-     +list
+  .posts 
+      each item in posts 
+        +postBlock({
+          title:item.title,
+          author:item.author,
+          createAt: item.createAt
+        })

@@ -64,17 +64,31 @@ export const postEdit = async(req,res) => {
       body: { title, content, author, pwd}
     } = req;
     
-      const post =await Post.findOne({_id : id})
+      const post = await Post.findOne({_id : id})
       console.log(post.pwd, pwd);
       if(pwd === post.pwd){   
       await Post.findOneAndUpdate({_id : id}, {title, content, author})
       res.redirect(`/detail/${id}`,({check})); //redirect는 쓰면 안됨??
       } else {
-      console.log('이 패스워드는 아니다 나가라')
+        //res.send(`<script type="text/javascript"> alert("틀림") </script>`)
+        console.log('이 패스워드는 아니다 나가라');
     }
   } catch(error){
     res.redirect('/')
+  } 
+}
+
+export const deletePost = async (req,res) =>{
+  const {
+    params : {id},
+  } = req;
+  try{
+    await Post.findOneAndDelete({ _id: id});
+    console.log('삭제되었습니다.')
+  } catch (error) {
+    console.log(error);
   }
+  res.redirect('/');
 }
 
 

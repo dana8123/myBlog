@@ -9,5 +9,5 @@ block content
       textarea(name="content", placeholder="내용을입력하세요", cols="30", rows="10", required=true)=post.content
       input(type='submit', value='Update Post')
 
-      a(href='...')
-        button|Delete Post 
+    a(href=`/${post.id}/delete`)
+      button|Delete Post 

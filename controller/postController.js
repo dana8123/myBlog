@@ -81,10 +81,16 @@ export const postEdit = async(req,res) => {
 export const deletePost = async (req,res) =>{
   const {
     params : {id},
+    body: {pwd}
   } = req;
   try{
+    const post = await Post.findOne({_id : id})
+    if(pwd === post.pwd){
     await Post.findOneAndDelete({ _id: id});
     console.log('삭제되었습니다.')
+    } else{
+      console.log('비밀번호 틀렸다!')
+    }
   } catch (error) {
     console.log(error);
   }

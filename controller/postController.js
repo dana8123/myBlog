@@ -58,13 +58,14 @@ export const getEdit = async (req,res) => {
   }
 }
 
-export const postEdit = (req,res) => {
+export const postEdit = async(req,res) => {
   const {
     params: {id},
-    body: { title, content, author, createAt, pwd}
+    body: { title, content, author, pwd}
   } = req;
-  try{
-    Post.findByIdAndUpdate({_id : id}, {title, content})
+  try{    
+    await Post.findOneAndUpdate({_id : id}, {title, content})
+    res.redirect(`/detail/${id}`);  
   } catch(error){
     res.redirect('/')
   }

@@ -7,7 +7,7 @@ indexRouter.get('/upload', getUpload);
 indexRouter.post('/upload', postUpload);
 indexRouter.get('/detail/:id', detail);
 indexRouter.get('/:id/edit', getEdit);
-indexRouter.post('/edit', postEdit);
+indexRouter.post('/:id/edit', postEdit);
 
 
 

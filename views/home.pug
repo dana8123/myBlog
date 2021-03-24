@@ -5,6 +5,7 @@ block content
   .posts 
       each item in posts 
         +postBlock({
+          id:item.id,
           title:item.title,
           author:item.author,
           createAt: item.createAt

@@ -1,8 +1,8 @@
 mixin postBlock(post = {})
 
   .postBlock
-    a(href=`/detail/${post.id}`) 
-      h2.postBlock__title=post.title 
+    a(href=`detail/${post.id}`) 
+      h1.postBlock__title=post.title 
     h3.postBlock__author=post.author
     h6.postBlock__createAt=post.createAt 
 

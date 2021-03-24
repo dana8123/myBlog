@@ -32,7 +32,15 @@ export const postUpload = async(req,res) =>  {
 
 //게시글 id 별 detail페이지
 export const detail = async (req,res,next) => {
-  res.render(`detail`)
+  const {
+    params: {id}
+  } = req;
+  try{
+    const post = await Post.findById(id);
+    res.render(`detail`, post)    
+  } catch(error){
+    console.log(error)
+  }
   next();
 }
 
@@ -41,4 +49,7 @@ res.send('this is update');
 
 export const getUpdate = (req,res) => 
 res.send('this is update');
+
+
+
 

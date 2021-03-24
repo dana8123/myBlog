@@ -1,5 +1,6 @@
 import Post from "../models/post.js";
 
+
 export const home = async (req,res) => {
   try{
     const posts = await Post.find({}).sort({createAt: -1});//await빠짐
@@ -25,7 +26,14 @@ export const postUpload = async(req,res) =>  {
     pwd,
     content
   });
-  res.redirect("/");
+  res.redirect(`detail/${newPost.id}`);
+}
+
+
+//게시글 id 별 detail페이지
+export const detail = async (req,res,next) => {
+  res.render(`detail`)
+  next();
 }
 
 export const postUpdate = (req,res) => 

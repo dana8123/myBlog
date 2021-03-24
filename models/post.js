@@ -21,7 +21,7 @@ const postSchema = new Schema({
   content: {
     type: String,
 
-  }
+  },
 }) 
 
 

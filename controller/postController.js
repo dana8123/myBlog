@@ -4,7 +4,6 @@ import Post from "../models/post.js";
 export const home = async (req,res) => {
   try{
     const posts = await Post.find({}).sort({createAt: -1});//await빠짐
-    console.log(posts);
     res.render("home",{ siteTitle: 'myBlog', posts });
   } catch(error){
     console.log(error);
@@ -59,13 +58,20 @@ export const getEdit = async (req,res) => {
 }
 
 export const postEdit = async(req,res) => {
-  const {
-    params: {id},
-    body: { title, content, author, pwd}
-  } = req;
-  try{    
-    await Post.findOneAndUpdate({_id : id}, {title, content})
-    res.redirect(`/detail/${id}`);  
+  try{ 
+    const {
+      params: {id},
+      body: { title, content, author, pwd}
+    } = req;
+    
+      const post =await Post.findOne({_id : id})
+      console.log(post.pwd, pwd);
+      if(pwd === post.pwd){   
+      await Post.findOneAndUpdate({_id : id}, {title, content, author})
+      res.redirect(`/detail/${id}`,({check})); //redirect는 쓰면 안됨??
+      } else {
+      console.log('이 패스워드는 아니다 나가라')
+    }
   } catch(error){
     res.redirect('/')
   }

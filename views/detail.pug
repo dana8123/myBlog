@@ -2,7 +2,10 @@ extends layouts/main.pug
 
 block content 
     .post__info 
-       h1.post.title
-       h3.post.content
+       h1=post.title
+       h4=post.author 
+       h5=post.createAt 
+       h3=post.content
     .post__btn 
-        input(type='button', value='수정하기')
+    a(href=`/${post.id}/edit`) 
+        button|Edit Post

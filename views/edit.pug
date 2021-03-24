@@ -1,0 +1,11 @@
+extends layouts/main.pug
+
+block content 
+  .form-container
+    form(action=`/upload`,method='post')
+      input(type='text', placeholder='제목을 입력하세요', name='title', value=post.title)
+      input(type='text', placeholder='닉네임을 입력하세요', name='author', value=post.author)
+      input(type='text', placeholder='암호입력', name='pwd', required=true)
+      textarea(name="content", placeholder="내용을입력하세요", cols="30", rows="10", required=true)=post.content
+
+      input(type='submit', value='수정완료')

@@ -37,18 +37,38 @@ export const detail = async (req,res,next) => {
   } = req;
   try{
     const post = await Post.findById(id);
-    res.render(`detail`, post)    
+    res.render(`detail`, {post})    
   } catch(error){
     console.log(error)
   }
   next();
 }
 
-export const postUpdate = (req,res) => 
-res.send('this is update');
 
-export const getUpdate = (req,res) => 
-res.send('this is update');
+//수정하기
+export const getEdit = async (req,res) => {
+  const{
+    params: {id}
+  } = req;
+  try{
+    const post = await Post.findById(id);
+    res.render('edit',{ post });
+  } catch(error){
+    res.redirect('/');
+  }
+}
+
+export const postEdit = (req,res) => {
+  const {
+    params: {id},
+    body: { title, content, author, createAt, pwd}
+  } = req;
+  try{
+    Post.findByIdAndUpdate({_id : id}, {title, content})
+  } catch(error){
+    res.redirect('/')
+  }
+}
 
 
 

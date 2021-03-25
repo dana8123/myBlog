@@ -2,11 +2,13 @@ import mongoose from 'mongoose';
 
 const connect = () => {
 
-mongoose.connect('mongodb://localhost/myBlog', {
+mongoose.connect('mongodb://localhost:27017/admin', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  user: "sample02",
+  pass: "0070dmdkr!"
 }, (error) => {
   if(error){console.log('몽고디비 연결에러',(error));
 } else{

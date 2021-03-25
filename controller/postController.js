@@ -7,7 +7,7 @@ export const home = async (req,res) => {
     res.render("home",{ siteTitle: 'myBlog', posts });
   } catch(error){
     console.log(error);
-    res.render("Home", { siteTitle: 'myBlog', posts:[] });
+    res.render("home", { siteTitle: 'myBlog', posts:[] });
   }
 }
 

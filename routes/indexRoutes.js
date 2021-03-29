@@ -1,19 +1,32 @@
 import express from "express";
-import { home, getUpload, postUpload, getEdit, postEdit, detail, postDelete} from "../controller/postController.js";
+import { home, getUpload, postUpload, getEdit, postEdit, detail, postDelete, getComment} from "../controller/postController.js";
 import { getJoin, getLogin, postJoin, postLogin} from "../controller/userController.js";
 export const indexRouter = express.Router();
 
 indexRouter.get('/', home);
+
+//upload routes
 indexRouter.get('/upload', getUpload);
 indexRouter.post('/upload', postUpload);
+
+//detail page routes
 indexRouter.get('/detail/:id', detail);
+
+//deit routes
 indexRouter.get('/:id/edit', getEdit);
 indexRouter.post('/:id/edit', postEdit);
+
+//delete routes
 indexRouter.post('/:id/delete', postDelete)
+
+//join, login routes
 indexRouter.get('/login', getLogin);
 indexRouter.post('/login', postLogin);
 indexRouter.get('/join', getJoin);
 indexRouter.post('/join', postJoin);
+
+//comment routes
+indexRouter.get('/comment/:id', getComment);
 
 
 

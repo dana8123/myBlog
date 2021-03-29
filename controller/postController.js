@@ -102,5 +102,10 @@ export const postDelete = async (req,res) =>{
 /////////////
 //댓      글//
 ////////////
+export const getComment = async(req,res) => {
 
+};
 
+export const postComment = async(req,res) => {
+
+};

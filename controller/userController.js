@@ -16,14 +16,14 @@ export const postJoin = async(req,res) => {
       });
       return;
     }
-  //  const existsUser = await User.findOne({ userId });
-  // // 중복 id 확인 코드
-  //   if( existsUser ){
-  //     res.status(400).send({
-  //       error: '이미 가입된 ID가 있습니다.'
-  //     });
-  //     return;
-  //   }
+   const existsUser = await User.findOne({ userId });
+  // 중복 id 확인 코드
+    if( existsUser ){
+      res.status(400).send({
+        error: '이미 가입된 ID가 있습니다.'
+      });
+      return;
+    }
     
     await User.create({
       userId, userName, password

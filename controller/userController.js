@@ -1,4 +1,5 @@
 import User from "../models/users.js"
+import jwt from "jsonwebtoken";
 
 
 export const getJoin = async(req,res) => {
@@ -41,10 +42,30 @@ export const postJoin = async(req,res) => {
 //////////////
 /////로그인////
 /////////////   
-  export const getLogin = async(req, res) => {
+
+export const getLogin = async(req,res) => {
+  res.render('login');
+};
+export const postLogin = async(req, res) => {
+  try{
     const{ userId, password } = req.body;
+    const user = await User.findOne({ userId, password });
+
+    if ( !user ){
+      res.status(401).send({
+        error : '존재하지 않는 회원입니다.'
+      });
+      return;
+    };
+    //내 시크릿키..올라가면 안되는거아닌가....?
+    const token = jwt.sign({ userId: user.userId}, "yj-secret-key");
+    res.send({
+      token,
+    });
+  }catch (err) {
+      res.status(400).send({
+        error: '재시도해주세요'
+      })
+    }
   };
 
-  export const postLogin = async(req,res) => {
-    res.redirect('/');
-  };

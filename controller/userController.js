@@ -1,6 +1,7 @@
 import User from "../models/users.js"
 import jwt from "jsonwebtoken";
-
+import { Router } from "express";
+//import { authMiddleware } from "../middlewares/auth-middleware.js";
 
 export const getJoin = async(req,res) => {
   res.render('join', { User });
@@ -25,7 +26,7 @@ export const postJoin = async(req,res) => {
       });
       return;
     }
-    
+  //유저 생성 코드  
     await User.create({
       userId, userName, password
     });
@@ -69,3 +70,19 @@ export const postLogin = async(req, res) => {
     }
   };
 
+////////////////
+///사용자인증//////
+////////////////
+// export const getAuth = authMiddleware, async(req,res)=>{
+//   const { user } = res.locals;
+//   res.send({
+//     user:{
+//       userId: user.userId,
+//       userName : user.userName
+//     }
+//   });
+// });
+
+
+
+//TODO: 사용자 인증 부분 코드 작성 필요

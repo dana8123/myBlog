@@ -2,18 +2,27 @@ import jwt from "jsonwebtoken";
 import Users from "../models/users";
 
 
-module.exports = (err,req,res,next) =>{
+export const authMiddleware  = (req,res,next) =>{
   const { authorizaion } = req.headers;
   const [tokenType, tokenVale ] = authorizaion.split(' ');
 
   if ( tokenType !== 'Bearer' ){
-    res.status(401).send({ error: '로그인 후 사용하세요!'});
+    res.status(401).send({ 
+      error: '로그인 후 사용하세요!'
+    });
   return;
   }
   
   try{
     const { userId } = jwt.verify(tokenValue, "yj-secret-key");
 
-    Users.findById
+    Users.findOne({ userId }).then((user) =>{
+      res.locals.user = user;
+      next();
+    })
+  } catch(error) {
+    res.status(401).send({
+      error : '로그인이 필요합니다.'
+    });
   }
 };

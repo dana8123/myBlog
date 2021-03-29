@@ -99,5 +99,8 @@ export const postDelete = async (req,res) =>{
   res.redirect('/');
 }
 
+/////////////
+//댓      글//
+////////////
 
 

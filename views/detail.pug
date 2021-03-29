@@ -9,3 +9,12 @@ block content
     .post__btn 
     a(href=`/${post.id}/edit`) 
         button|Edit Post
+    .post__comment 
+        input(type="text" placeholder="작성자" name="comment_author")
+        input(type="text" placeholder="소중한 댓글 한마디" name="comment")
+        a(href='...')
+            button 확인
+
+    .comments 
+        div 댓글내용이 줄줄이 달리는것이 목적이다 
+        div 이렇게 말이지

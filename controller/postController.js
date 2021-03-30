@@ -1,5 +1,6 @@
 import Post from "../models/post.js";
 import Comment from "../models/comment.js"
+import { authMiddlesware } from "../middlewares/auth-middleware.js";
 
 
 export const home = async (req,res) => {
@@ -105,7 +106,7 @@ export const postDelete = async (req,res) =>{
 //댓      글//
 ////////////
 
-export const postComment = async(req,res) => {
+export const postComment = async (req,res) => {
   const {id} = req.params;
   const { comment, author } = req.body;
   try{

@@ -1,7 +1,8 @@
 import User from "../models/users.js"
 import jwt from "jsonwebtoken";
-import { Router } from "express";
-//import { authMiddleware } from "../middlewares/auth-middleware.js";
+import dotenv from "dotenv"
+dotenv.config()
+import { authMiddlesware } from "../middlewares/auth-middleware.js";
 
 export const getJoin = async(req,res) => {
   res.render('join', { User });
@@ -47,6 +48,8 @@ export const postJoin = async(req,res) => {
 export const getLogin = async(req,res) => {
   res.render('login');
 };
+
+//로그인 및 토큰 발급
 export const postLogin = async(req, res) => {
   try{
     const{ userId, password } = req.body;
@@ -58,14 +61,19 @@ export const postLogin = async(req, res) => {
       });
       return;
     };
-    //내 시크릿키..올라가면 안되는거아닌가....?
-    const token = jwt.sign({ userId: user.userId}, "yj-secret-key");
-    res.send({
+    //유저 로그인에 성공한 경우 토큰 발급
+    const token = jwt.sign({ userId: user.userId}, 
+      process.env.JWT_SECRET ,
+      {expiresIn: '30m'} //인증시간
+    );
+    res.json({
       token,
+      message: '토큰이 발급되었습니다.'
     });
-  }catch (err) {
+
+  } catch (err) {
       res.status(400).send({
-        error: '재시도해주세요'
+        error: '토큰 발급 실패, 재시도해주세요'
       })
     }
   };
@@ -73,16 +81,9 @@ export const postLogin = async(req, res) => {
 ////////////////
 ///사용자인증//////
 ////////////////
-// export const getAuth = authMiddleware, async(req,res)=>{
-//   const { user } = res.locals;
-//   res.send({
-//     user:{
-//       userId: user.userId,
-//       userName : user.userName
-//     }
-//   });
-// });
 
-
+export const test = (req,res) => {
+  res.json(req.decoded);
+};
 
 //TODO: 사용자 인증 부분 코드 작성 필요

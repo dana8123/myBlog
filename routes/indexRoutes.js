@@ -1,6 +1,7 @@
 import express from "express";
 import { home, getUpload, postUpload, getEdit, postEdit, detail, postDelete, postComment} from "../controller/postController.js";
-import { getJoin, getLogin, postJoin, postLogin} from "../controller/userController.js";
+import { getJoin, getLogin, postJoin, postLogin, test} from "../controller/userController.js";
+import { authMiddlesware } from "../middlewares/auth-middleware.js";
 export const indexRouter = express.Router();
 
 indexRouter.get('/', home);
@@ -28,6 +29,8 @@ indexRouter.post('/join', postJoin);
 //comment routes(CRUD)
 indexRouter.post('/:id/comment', postComment);
 
+//사용자인증
+indexRouter.get('/test', authMiddlesware, test);
 
 
 

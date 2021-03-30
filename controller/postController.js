@@ -1,4 +1,5 @@
 import Post from "../models/post.js";
+import Comment from "../models/comment.js"
 
 
 export const home = async (req,res) => {
@@ -35,7 +36,8 @@ export const detail = async (req,res,next) => {
     params: {id}
   } = req;
   try{
-    const post = await Post.findById(id);
+    const post = await Post.findById(id).populate('comments');
+    console.log(post);
     res.render(`detail`, {post})    
   } catch(error){
     console.log(error)
@@ -102,10 +104,22 @@ export const postDelete = async (req,res) =>{
 /////////////
 //댓      글//
 ////////////
-export const getComment = async(req,res) => {
-
-};
 
 export const postComment = async(req,res) => {
-
+  const {id} = req.params;
+  const { comment, author } = req.body;
+  try{
+  const post = await Post.findById(id);
+  const newComment = await Comment.create({
+    text: comment,
+    author: author,
+  });
+  post.save();
+  console.log(newComment);
+  console.log('새 댓글!')
+  post.comments.push(newComment.id);
+  res.redirect(`/detail/${post.id}`);
+} catch(error){
+  res.status(400).send('댓글기능 중 오류가 발생했습니다.')
+}
 };

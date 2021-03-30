@@ -9,6 +9,10 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  author: {
+    type: String,
+    required: true,
+  }
 })
 
 const model = mongoose.model("Comment", commentSchema);

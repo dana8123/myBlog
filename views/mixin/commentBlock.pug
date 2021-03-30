@@ -1,6 +1,8 @@
-mixin commentBlock({})
+mixin commentBlock(comment = {})
 
   .commentBlock
-    span.h3 작성자
-    h5 댓글내용
-  
+    if block
+      h3 comment.author
+      h5 comment.comment
+    else 
+      span 아직 댓글이 없어요

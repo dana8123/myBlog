@@ -1,5 +1,5 @@
 import express from "express";
-import { home, getUpload, postUpload, getEdit, postEdit, detail, postDelete, getComment} from "../controller/postController.js";
+import { home, getUpload, postUpload, getEdit, postEdit, detail, postDelete, postComment} from "../controller/postController.js";
 import { getJoin, getLogin, postJoin, postLogin} from "../controller/userController.js";
 export const indexRouter = express.Router();
 
@@ -25,8 +25,8 @@ indexRouter.post('/login', postLogin);
 indexRouter.get('/join', getJoin);
 indexRouter.post('/join', postJoin);
 
-//comment routes
-indexRouter.get('/comment/:id', getComment);
+//comment routes(CRUD)
+indexRouter.post('/:id/comment', postComment);
 
 
 

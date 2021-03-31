@@ -25,5 +25,10 @@ block content
                 script 
     .comments 
         each comment in post.comments
-            div #{comment.author} 
-            div #{comment.text}
+            if ( user.userName === comment.author) 
+                button(type="submit") 수정하기
+                button(type="submit") 삭제하기
+            .author 글쓴이
+                #{comment.author} 
+            .text
+                div #{comment.text}

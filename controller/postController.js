@@ -108,22 +108,22 @@ export const postDelete = async (req,res) =>{
 ////////////
 
 export const postComment = async (req,res) => {
-  const { userId } = res.locals.user;
-  console.log(userId);
   const {id} = req.params;
   const { comment, author } = req.body;
+  const { userId } = res.locals.user;
   try{
-  const post = await Post.findById(usesrId, id);
-  const newComment = await Comment.create({
-    text: comment,
-    author: author,
-  });
-  post.save();
-  console.log(newComment);
-  console.log('새 댓글!')
-  post.comments.push(newComment.id);
-  res.redirect(`/detail/${post.id}`);
+    const post = await Post.findById(id);
+    const newComment = await Comment.create({
+      text: comment,
+      author: author,
+    });
+    post.save();
+    console.log(newComment);
+    console.log('새 댓글!')
+    post.comments.push(newComment.id);
+    res.redirect(`/detail/${post.id}`);
 } catch(error){
-  res.status(400).send('댓글기능 중 오류가 발생했습니다.')
+    console.log(error);
+    res.status(400).send('댓글기능 중 오류가 발생했습니다.')
 }
 };

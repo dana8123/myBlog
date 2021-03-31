@@ -12,7 +12,7 @@ block content
         button|Edit Post
     .post__comment 
         form(action=`/${post.id}/comment` method="post")
-            input(type="text" placeholder="작성자" name="author")
+            input(type="text" value=`${user}` name="author")
             input(type="text" placeholder="소중한 댓글 한마디" name="comment")
             button(type="submit") 확인
 

@@ -24,11 +24,18 @@ block content
                 button 확인
                 script 
     .comments 
-        each comment in post.comments
-            if ( user.userName === comment.author) 
-                button(type="submit") 수정하기
-                button(type="submit") 삭제하기
-            .author 글쓴이
-                #{comment.author} 
-            .text
-                div #{comment.text}
+        if (user)
+            each comment in post.comments
+                if ( user.userName === comment.author)
+                    a(href=`/${comment.id}/comment/edit`) 
+                        button(type="submit") 수정하기
+                    form(action=`/${comment.id}/comment/delete` method='post') 
+                        button(type="submit") 삭제하기
+                else
+                .author 글쓴이
+                    #{comment.author} 
+                .text
+                    #{comment.text}
+        else          
+            span show hide 이용해야될 것 같은데..?  
+

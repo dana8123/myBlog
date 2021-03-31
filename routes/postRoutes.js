@@ -1,5 +1,5 @@
 import express from "express";
-import{ getUpload, postUpload, getEdit, postEdit, postDelete, postComment } from "../controller/postController.js";
+import{ getUpload, postUpload, getEdit, postEdit, postDelete, postComment, postEditComment, deleteComment } from "../controller/postController.js";
 import { authMiddlesware } from "../middlewares/auth-middleware.js";
 export const postRouter = express.Router();
 
@@ -17,3 +17,5 @@ postRouter.post('/:id/delete', postDelete)
 
 //comment routes(CRUD)
 postRouter.post('/:id/comment', authMiddlesware ,postComment);
+postRouter.post('/:id/comment/edit', authMiddlesware, postEditComment);
+postRouter.post('/:id/comment/delete', authMiddlesware, deleteComment);

@@ -35,7 +35,7 @@ export const postUpload = async(req,res) =>  {
 //게시글 id 별 detail페이지
 export const detail = async (req,res,next) => {
   const {
-    params: {id}
+    params: {id}   
   } = req;
   try{
     const post = await Post.findById(id).populate('comments');
@@ -75,7 +75,7 @@ export const postEdit = async(req,res) => {
       res.redirect(`/detail/${id}`,({check})); //redirect는 쓰면 안됨??
       } else {
         //res.send(`<script type="text/javascript"> alert("틀림") </script>`)
-        console.log('이 패스워드는 아니다 나가라');
+        console.log('패스워드가 불일치해서 수정하기 실패!');
     }
   } catch(error){
     res.redirect('/')
@@ -118,8 +118,6 @@ export const postComment = async (req,res) => {
       author: author,
     });
     post.save();
-    console.log(newComment);
-    console.log('새 댓글!')
     post.comments.push(newComment.id);
     res.redirect(`/detail/${post.id}`);
 } catch(error){
@@ -127,3 +125,25 @@ export const postComment = async (req,res) => {
     res.status(400).send('댓글기능 중 오류가 발생했습니다.')
 }
 };
+
+//댓글 수정하기
+//comment의 id를 가져와서 삭제하나?
+//아니면 postid를 갖고와서 그곳의 코멘트를 수정하는게 낫겠다...
+export const postEditComment = async(req,res) => {
+  const { id } = req.params;
+  const { author } = req.body;
+  const comment = await Post.findById(id);
+  
+  await comment.findOneAndUpdate({ id }, { text });
+
+  res.redirect(`detail/${post.id}`);
+}
+
+//댓글 삭제하기
+export const deleteComment = async (req,res) => {
+  const { 
+    params: {id},
+  } = req;
+  await Comment.findByIdAndDelete(id);
+  res.redirect(`/`); //redirec post detail ID값 고민해볼 것
+}

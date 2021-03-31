@@ -14,8 +14,9 @@ export const home = async (req,res) => {
 }
 
 
-export const getUpload = (req,res) => 
+export const getUpload = (req,res) =>{ 
   res.render("upload",{title: 'myBlog'});
+};
 
 export const postUpload = async(req,res) =>  {
   const {
@@ -107,10 +108,12 @@ export const postDelete = async (req,res) =>{
 ////////////
 
 export const postComment = async (req,res) => {
+  const { userId } = res.locals.user;
+  console.log(userId);
   const {id} = req.params;
   const { comment, author } = req.body;
   try{
-  const post = await Post.findById(id);
+  const post = await Post.findById(usesrId, id);
   const newComment = await Comment.create({
     text: comment,
     author: author,

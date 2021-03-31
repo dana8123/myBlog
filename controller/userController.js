@@ -8,8 +8,9 @@ export const getJoin = async(req,res) => {
   res.render('join', { User });
 }
 
+//회원가입
 
-export const postJoin = async(req,res) => {
+export const postJoin = async(req,res,next) => {
   try{
     const { userName, userId, password, confirmPassword } = req.body;
   // 패스워드 동일 여부
@@ -31,7 +32,8 @@ export const postJoin = async(req,res) => {
     await User.create({
       userId, userName, password
     });
-    res.status(201).redirect('/');
+    res.status(201);
+    next();
 
   }catch(err){
     res.status(400).send({
@@ -50,26 +52,22 @@ export const getLogin = async(req,res) => {
 };
 
 //로그인 및 토큰 발급
-export const postLogin = async(req, res) => {
+export const postLogin = async(req, res,next) => {
   try{
     const{ userId, password } = req.body;
     const user = await User.findOne({ userId, password });
 
     if ( !user ){
-      res.status(401).send({
-        error : '존재하지 않는 회원입니다.'
-      });
+      res.status(401)
+      .send('<script type="text/javascript">alert("존재하지않는 회원입니다");</script>');  //존재하지않는 회원이라는 안내 띄우기
       return;
     };
     //유저 로그인에 성공한 경우 토큰 발급
     const token = jwt.sign({ userId: user.userId}, 
-      process.env.JWT_SECRET ,
-      {expiresIn: '30m'} //인증시간
+      process.env.JWT_SECRET 
     );
-    res.json({
-      token,
-      message: '토큰이 발급되었습니다.'
-    });
+    // 쿠키에 user라는 이름으로 토큰 저장
+    res.cookie('user', token).redirect('/');
 
   } catch (err) {
       res.status(400).send({
@@ -78,12 +76,15 @@ export const postLogin = async(req, res) => {
     }
   };
 
+
+export const logout = (req,res) => {
+  res.redirect('/');
+};
 ////////////////
 ///사용자인증//////
 ////////////////
 
 export const test = (req,res) => {
-  res.json(req.decoded);
+  res.send({user: res.locals.user});
 };
 
-//TODO: 사용자 인증 부분 코드 작성 필요

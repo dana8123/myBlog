@@ -6,14 +6,13 @@ const userSchema = new Schema({
     type: String,
     require: true
   },
-  userId: {
-    type: String,
-    require: true,
-  },
   password: {
     type: String,
     require: true,
   },
+  userId: {
+    type: String,
+  }
 });
 
 const model = mongoose.model("User", userSchema);

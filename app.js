@@ -8,9 +8,9 @@ const app = express();
 
 app.set('view engine', 'pug');
 //middle wares
-app.use(express.static('public'));
 app.use(express.urlencoded({extended : false}));
 app.use(express.json());
+app.use('/public', express.static('public'));
 app.use(cookieParser());
 //routing
 app.use(authMiddlesware);

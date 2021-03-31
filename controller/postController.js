@@ -15,10 +15,12 @@ export const home = async (req,res) => {
 
 
 export const getUpload = (req,res) =>{ 
+  const { userId } = res.locals.user;
   res.render("upload",{title: 'myBlog'});
 };
 
 export const postUpload = async(req,res) =>  {
+  const { userId } = res.locals.user;
   const {
     body: { title, author, pwd, content }
   } = req;
@@ -129,14 +131,24 @@ export const postComment = async (req,res) => {
 //댓글 수정하기
 //comment의 id를 가져와서 삭제하나?
 //아니면 postid를 갖고와서 그곳의 코멘트를 수정하는게 낫겠다...
-export const postEditComment = async(req,res) => {
-  const { id } = req.params;
-  const { author } = req.body;
-  const comment = await Post.findById(id);
-  
-  await comment.findOneAndUpdate({ id }, { text });
+export const getEditComment = async (req, res) => {
+  const{ 
+    params: { id },
+    body: { author, text }
+  } = req;
+  const comment = await Comment.findById(id);
+  res.render('')
+}
 
-  res.redirect(`detail/${post.id}`);
+export const postEditComment = async(req,res) => {
+  const {
+    params : {id},
+    body : { text },
+  } = req;
+  const comment = await Comment.findById(id);
+  comment.text = text;
+  const result = comment.save();
+  res.send('댓글 수정 완료');
 }
 
 //댓글 삭제하기

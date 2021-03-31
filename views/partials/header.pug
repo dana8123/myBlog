@@ -4,14 +4,18 @@ header.header
       a(href="/")
         i.fas.fa-home
         span myBlog 
-    .header__column 
-      a(href="/upload")
-       i.fas.fa-plus-square
-       span 글쓰기
-    .header__column 
-      a(href="/login")
-       i.fas.fa-sign-in-alt
-       span 로그인
-      a(href="/join")
-       i.fas.fa-user-friends
-       span 회원가입
+    ul 
+      if !user
+        a(href="/login")
+          i.fas.fa-sign-in-alt
+          span 로그인
+        a(href="/join")
+          i.fas.fa-user-friends
+          span 회원가입
+      else 
+        a(href="/upload")
+          i.fas.fa-plus-square
+          span 글쓰기
+        a(href="/logout")
+          span 로그아웃
+

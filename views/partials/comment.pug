@@ -3,22 +3,22 @@
         if user
             form(action=`/${post.id}/comment` method="post")
                 input(type="text" value=`${user.userName}` name="author" readonly)
-                button(type="submit") 확인
                 input(type="text" placeholder="소중한 댓글 한마디" name="comment")
+                button(type="submit") 확인
         else
             input(type="text" value=`로그인이 필요합니다.` name="author" readonly)
             button(onclick='loginAlert()') 확인
 <!--유저아이디와 글쓴이 일치여부 확인 후 수정하기 삭제하기 show-->
-each comment in post.comments  
-    .author 글쓴이:
-        span #{comment.author} 
-    .text
-        span #{comment.text}
+each comment in post.comments 
+    .comment_wrapper
+        .author 글쓴이:
+            span #{comment.author} 
+        .text
+            span #{comment.text}
     if user
         if (user.userName === comment.author)
             form(action=`/${comment.id}/comment/edit` method='post') 
-                button(onclick='') 수정하기
-                include editcomment.pug
+                 include editcomment.pug
             form(action=`/${comment.id}/comment/delete` method='post') 
                 button(type="submit") 삭제하기
     else 

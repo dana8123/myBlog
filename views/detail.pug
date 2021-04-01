@@ -1,12 +1,13 @@
 extends layouts/main.pug
 
 block content 
-    .post__info 
-       h1=post.title
-       h4=post.author 
-       h5=post.createAt 
-       h3=post.content
-    .post__btn 
-    a(href=`/${post.id}/edit`) 
-        button|Edit Post
-    include partials/comment.pug
+    .post__wrapper
+        .post__info 
+        h1=post.title
+        h5=post.createAt 
+        h4=post.author 
+        h3=post.content
+        .post__btn 
+        a(href=`/${post.id}/edit`) 
+            button|Edit Post
+        include partials/comment.pug

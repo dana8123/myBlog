@@ -122,7 +122,7 @@ export const postComment = async (req,res) => {
     });
     post.save();
     post.comments.push(newComment.id);
-  res.redirect(`/detail/${post.id}`);
+    res.redirect(`/detail/${post.id}`);
 } catch(error){
     console.log(error);
     res.status(400).send('댓글기능 중 오류가 발생했습니다.')

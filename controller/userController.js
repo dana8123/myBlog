@@ -78,7 +78,8 @@ export const postLogin = async(req, res,next) => {
 
 
 export const logout = (req,res) => {
-  res.redirect('/');
+  const { user } = res.locals.user;
+  res.clearCookie('user').redirect('/')
 };
 ////////////////
 ///사용자인증//////

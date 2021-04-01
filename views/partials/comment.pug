@@ -1,14 +1,12 @@
 <!--코멘트 작성 코드-->
 .post__comment 
-    form(action=`/${post.id}/comment` method="post")
         if user
-            input(type="text" value=`${user.userName}` name="author" readonly)
+            form(action=`/${post.id}/comment` method="post")
+                input(type="text" value=`${user.userName}` name="author" readonly)
+                button(type="submit") 확인
+                input(type="text" placeholder="소중한 댓글 한마디" name="comment")
         else
             input(type="text" value=`로그인이 필요합니다.` name="author" readonly)
-        input(type="text" placeholder="소중한 댓글 한마디" name="comment")
-        if user
-            button(type="submit") 확인
-        else 
             button(onclick='loginAlert()') 확인
 <!--유저아이디와 글쓴이 일치여부 확인 후 수정하기 삭제하기 show-->
 each comment in post.comments  
@@ -24,4 +22,4 @@ each comment in post.comments
             form(action=`/${comment.id}/comment/delete` method='post') 
                 button(type="submit") 삭제하기
     else 
-        span ❤️
+        

@@ -3,7 +3,7 @@ import { home, detail} from "../controller/postController.js";
 export const globalRouter = express.Router();
 
 
-globalRouter.get('/', home);
+globalRouter.get('/',home);
 
 
 //detail page routes

@@ -14,9 +14,9 @@ app.use(express.json());
 app.use('/public', express.static('public'));
 app.use(cookieParser());
 //routing
-app.use('/',globalRouter)
 app.use(authMiddlesware);
-app.use("/",indexRouter);
+app.use('/',globalRouter)
+app.use('/',indexRouter);
 app.use('/',postRouter)
 
 

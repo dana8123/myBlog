@@ -137,7 +137,7 @@ export const getEditComment = async (req, res) => {
     body: { author, text }
   } = req;
   const comment = await Comment.findById(id);
-  res.render('')
+  res.render('/partial/editComment')
 }
 
 export const postEditComment = async(req,res) => {

@@ -10,32 +10,4 @@ block content
     .post__btn 
     a(href=`/${post.id}/edit`) 
         button|Edit Post
-    if user
-        .post__comment 
-            form(action=`/${post.id}/comment` method="post")
-                input(type="text" value=`${user.userName}` name="author" readonly)
-                input(type="text" placeholder="소중한 댓글 한마디" name="comment")
-                button(type="submit") 확인
-    else 
-        .post__comment-noUser
-            form
-                input(type="text" value='로그인이 필요합니다.' name="author" readonly)
-                input(type="text" placeholder="소중한 댓글 한마디" name="comment")
-                button 확인
-                script 
-    .comments 
-        if (user)
-            each comment in post.comments
-                if ( user.userName === comment.author)
-                    form(action=`/${comment.id}/comment/edit` method ='post') 
-                        button(type="submit") 수정하기
-                    form(action=`/${comment.id}/comment/delete` method='post') 
-                        button(type="submit") 삭제하기
-                else
-                .author 글쓴이
-                    span #{comment.author} 
-                .text
-                    span #{comment.text}
-        else          
-            span show hide 이용해야될 것 같은데..?  
-
+    include partials/comment.pug

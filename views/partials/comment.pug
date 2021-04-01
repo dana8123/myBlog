@@ -1,0 +1,20 @@
+<!--코멘트 작성 코드-->
+.post__comment 
+    form(action=`/${post.id}/comment` method="post")
+        input(type="text" value=`${user.userName}` name="author" readonly)
+        input(type="text" placeholder="소중한 댓글 한마디" name="comment")
+        if user
+            button(type="submit") 확인
+        else 
+            button(onclick='loginAlert()') 확인
+<!--유저아이디와 글쓴이 일치여부 확인 후 수정하기 삭제하기 show-->
+each comment in post.comments  
+    .author 글쓴이:
+        span #{comment.author} 
+    .text
+        span #{comment.text}
+    if (user.userName === comment.author)
+        form(action=`/${comment.id}/comment/edit` method ='get') 
+            button(type="submit") 수정하기
+        form(action=`/${comment.id}/comment/delete` method='post') 
+            button(type="submit") 삭제하기

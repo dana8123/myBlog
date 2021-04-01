@@ -17,7 +17,9 @@ export const authMiddlesware = (req,res,next) => {
       })
     }
     //쿠키가 없는 경우는, 에러처리가 아닌 예외처리로
-    next();
+    else{ 
+      next(); 
+    };
   } catch(error){
     if (error.name === 'TokenExpiredError') {
       return res.status(419).json({

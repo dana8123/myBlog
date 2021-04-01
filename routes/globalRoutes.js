@@ -6,5 +6,3 @@ export const globalRouter = express.Router();
 globalRouter.get('/',home);
 
 
-//detail page routes
-globalRouter.get('/detail/:id', detail);

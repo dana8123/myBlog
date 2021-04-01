@@ -17,6 +17,7 @@ each comment in post.comments
     .text
         span #{comment.text}
     if user
+<!--TODO: 수정하기 누르면, 수정하기 form이 나오고 거기에서 액션할 수 있도록 해야할 듯-->
         if (user.userName === comment.author)
             form(action=`/${comment.id}/comment/edit` method ='get') 
                 button(type="submit") 수정하기

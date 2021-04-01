@@ -39,6 +39,7 @@ export const detail = async (req,res,next) => {
   const {
     params: {id}   
   } = req;
+
   try{
     const post = await Post.findById(id).populate('comments');
     console.log(post);

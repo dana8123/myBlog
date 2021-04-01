@@ -1,8 +1,11 @@
 import express from "express";
+import { detail } from "../controller/postController.js";
 import { getJoin, getLogin, postJoin, postLogin, test} from "../controller/userController.js";
 import { authMiddlesware } from "../middlewares/auth-middleware.js";
 export const indexRouter = express.Router();
 
+//detail page routes
+indexRouter.get('/detail/:id' ,detail);
 
 //join, login routes
 indexRouter.get('/login' ,getLogin);

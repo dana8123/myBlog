@@ -1,0 +1,4 @@
+.edit__comment
+  form(action=`/${comment.id}/comment/edit` method ='get') 
+    input(type="text" value=`${user.userName}` name="author" readonly)
+    input(type="text" value= comment.text name="comment")

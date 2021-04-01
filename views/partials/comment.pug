@@ -17,10 +17,10 @@ each comment in post.comments
     .text
         span #{comment.text}
     if user
-<!--TODO: 수정하기 누르면, 수정하기 form이 나오고 거기에서 액션할 수 있도록 해야할 듯-->
         if (user.userName === comment.author)
-            form(action=`/${comment.id}/comment/edit` method ='get') 
-                button(type="submit") 수정하기
+            button(onclick='') 수정하기
+            include editcomment.pug
             form(action=`/${comment.id}/comment/delete` method='post') 
                 button(type="submit") 삭제하기
-    
+    else 
+        span ❤️

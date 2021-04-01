@@ -18,8 +18,9 @@ each comment in post.comments
         span #{comment.text}
     if user
         if (user.userName === comment.author)
-            button(onclick='') 수정하기
-            include editcomment.pug
+            form(action=`/${comment.id}/comment/edit` method='post') 
+                button(onclick='') 수정하기
+                include editcomment.pug
             form(action=`/${comment.id}/comment/delete` method='post') 
                 button(type="submit") 삭제하기
     else 

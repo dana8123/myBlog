@@ -1,7 +1,10 @@
 <!--코멘트 작성 코드-->
 .post__comment 
     form(action=`/${post.id}/comment` method="post")
-        input(type="text" value=`${user.userName}` name="author" readonly)
+        if user
+            input(type="text" value=`${user.userName}` name="author" readonly)
+        else
+            input(type="text" value=`로그인이 필요합니다.` name="author" readonly)
         input(type="text" placeholder="소중한 댓글 한마디" name="comment")
         if user
             button(type="submit") 확인
@@ -13,8 +16,10 @@ each comment in post.comments
         span #{comment.author} 
     .text
         span #{comment.text}
-    if (user.userName === comment.author)
-        form(action=`/${comment.id}/comment/edit` method ='get') 
-            button(type="submit") 수정하기
-        form(action=`/${comment.id}/comment/delete` method='post') 
-            button(type="submit") 삭제하기
+    if user
+        if (user.userName === comment.author)
+            form(action=`/${comment.id}/comment/edit` method ='get') 
+                button(type="submit") 수정하기
+            form(action=`/${comment.id}/comment/delete` method='post') 
+                button(type="submit") 삭제하기
+    

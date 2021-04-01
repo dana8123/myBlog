@@ -4,7 +4,6 @@ dotenv.config()
 import  User from "../models/users.js";
 
 export const authMiddlesware = (req,res,next) => {
-
   //인증 완료
   try{
     //요청 쿠키에 저장된 토큰과 비밀키를 사용하여 토큰 변환
@@ -22,7 +21,10 @@ export const authMiddlesware = (req,res,next) => {
       });
     }
     //이외에 토큰의 비밀키가 불일치
-    next();
+    res.status(400).send({
+      errorMessage: '사용자 인증 과정에서 알 수 없는 문제가 발생했습니다.'
+    })
+    //next();
   }
 }
   

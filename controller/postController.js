@@ -114,6 +114,7 @@ export const postComment = async (req,res) => {
   const { comment, author } = req.body;
   const { userId } = res.locals.user;
   try{
+    if (user){
     const post = await Post.findById(id);
     const newComment = await Comment.create({
       text: comment,
@@ -121,7 +122,8 @@ export const postComment = async (req,res) => {
     });
     post.save();
     post.comments.push(newComment.id);
-    res.redirect(`/detail/${post.id}`);
+  }
+    res.end();
 } catch(error){
     console.log(error);
     res.status(400).send('댓글기능 중 오류가 발생했습니다.')

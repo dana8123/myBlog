@@ -132,24 +132,14 @@ export const postComment = async (req,res) => {
 //댓글 수정하기
 //comment의 id를 가져와서 삭제하나?
 //아니면 postid를 갖고와서 그곳의 코멘트를 수정하는게 낫겠다...
-export const getEditComment = async (req, res) => {
-  const{ 
-    params: { id },
-    body: { author, text }
-  } = req;
-  const comment = await Comment.findById(id);
-  res.render('/partial/editComment')
-}
 
 export const postEditComment = async(req,res) => {
   const {
     params : {id},
-    body : { text },
+    body : { author, edittext, text },
   } = req;
-  const comment = await Comment.findById(id);
-  comment.text = text;
-  const result = comment.save();
-  res.send('댓글 수정 완료');
+  await Comment.findOneAndUpdate({_id:id} , { author, text:edittext });
+  res.redirect(`/`);
 }
 
 //댓글 삭제하기

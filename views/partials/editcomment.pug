@@ -1,4 +1,5 @@
 .edit__comment
-  form(action=`/${comment.id}/comment/edit` method ='get') 
+  form(action=`/${comment.id}/comment/edit` method ='post') 
     input(type="text" value=`${user.userName}` name="author" readonly)
-    input(type="text" value= comment.text name="comment")
+    input(type="text" value= comment.text name="edittext")
+    button 저장하기

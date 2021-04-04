@@ -2,7 +2,8 @@
 
 express, mongoDB
 CRUD
-without Log in
+Log in
+user Authentication
 https://tuigun.tistory.com/70
 
 ## what's in myBlog

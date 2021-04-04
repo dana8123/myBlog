@@ -4,7 +4,7 @@ express, mongoDB
 CRUD
 Log in
 user Authentication
-https://tuigun.tistory.com/70
+link(http://15.164.104.186/)
 
 ## what's in myBlog
 1. 글목록 조회 
@@ -51,3 +51,5 @@ https://tuigun.tistory.com/70
      - [x] 내가 작성한 댓글만 삭제 가능
      - [x] 삭제 시 알람 띄우기(정말 삭제하시겠습니까? 확인버튼)
    - [x] 간단한 css 작업
+
+https://tuigun.tistory.com/70
